@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 
+gem "haml-rails"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
+
+gem 'forem', :github => "radar/forem", :branch => "rails4"
+gem 'kaminari', '0.15.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

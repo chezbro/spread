@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
 
   attr_accessor :login
-  
+
   #->Prelang (user_login:devise/username_login_support)
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+
+  def forem_name
+    name
   end
 
 

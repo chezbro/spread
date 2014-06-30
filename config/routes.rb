@@ -1,11 +1,27 @@
 Spread::Application.routes.draw do
-  get "landings/index"
+
+  # This line mounts Forem's routes at /forums by default.
+  # This means, any requests to the /forums URL of your application will go to Forem::ForumsController#index.
+  # If you would like to change where this extension is mounted, simply change the :at option to something different.
+  #
+  # We ask that you don't use the :as option here, as Forem relies on it being the default of "forem"
+
+  mount Forem::Engine, :at => '/forums'
+  # root to: "landings#index", as: :homepage
+
+
+
+
+  get "/" => "landings#index", as:"homepage"
+
+
+
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords", omniauth_callbacks: "users/omniauth_callbacks"}, skip: [:sessions, :registrations]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'landings#index'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -55,13 +71,13 @@ Spread::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  
+
   #->Prelang (user_login:devise/stylized_paths)
   devise_scope :user do
     get    "login"   => "devise/sessions#new",         as: :new_user_session
     post   "login"   => "devise/sessions#create",      as: :user_session
     delete "signout" => "devise/sessions#destroy",     as: :destroy_user_session
-    
+
     get    "signup"  => "devise/registrations#new",    as: :new_user_registration
     post   "signup"  => "devise/registrations#create", as: :user_registration
     put    "signup"  => "devise/registrations#update", as: :update_user_registration
