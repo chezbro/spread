@@ -9,6 +9,14 @@ Spread::Application.routes.draw do
   mount Forem::Engine, :at => '/forums'
   # root to: "landings#index", as: :homepage
 
+  authenticated :user do
+    root to: "forem/forums#index", as: :authenticated_root
+  end
+  unauthenticated do
+    devise_scope :user do
+      root to: "landings#index", as: :unauthenticated_root
+    end
+  end
 
 
 
@@ -17,6 +25,10 @@ Spread::Application.routes.draw do
 
 
   devise_for :users, controllers: {registrations: "users/registrations", sessions: "users/sessions", passwords: "users/passwords", omniauth_callbacks: "users/omniauth_callbacks"}, skip: [:sessions, :registrations]
+
+  resources :matches
+  resources :teams
+  resources :bets
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

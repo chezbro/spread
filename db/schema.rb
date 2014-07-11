@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614012433) do
+ActiveRecord::Schema.define(version: 20140711113943) do
+
+  create_table "bets", force: true do |t|
+    t.integer "game_spread"
+    t.integer "wager"
+    t.integer "moneyline"
+    t.integer "match_id"
+    t.integer "user_id"
+    t.integer "home_team_id"
+    t.integer "away_team_id"
+  end
 
   create_table "forem_categories", force: true do |t|
     t.string   "name",       null: false
@@ -108,6 +118,27 @@ ActiveRecord::Schema.define(version: 20140614012433) do
   add_index "forem_views", ["user_id"], name: "index_forem_views_on_user_id"
   add_index "forem_views", ["viewable_id"], name: "index_forem_views_on_viewable_id"
 
+  create_table "matches", force: true do |t|
+    t.integer "home_team_id"
+    t.integer "away_team_id"
+    t.integer "home_team_score"
+    t.integer "away_team_score"
+    t.integer "bet_id"
+  end
+
+  create_table "odds", force: true do |t|
+    t.integer "moneyline"
+    t.integer "game_spread"
+  end
+
+  create_table "teams", force: true do |t|
+    t.integer "wins"
+    t.integer "losses"
+    t.string  "name"
+    t.string  "sport"
+    t.integer "bet_id"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",               null: false
     t.string   "encrypted_password",     default: "",               null: false
@@ -128,6 +159,7 @@ ActiveRecord::Schema.define(version: 20140614012433) do
     t.boolean  "forem_admin",            default: false
     t.string   "forem_state",            default: "pending_review"
     t.boolean  "forem_auto_subscribe",   default: false
+    t.integer  "bet_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,9 @@
+<%= simple_form_for @bet do |f| %>
+  <%= f.input :game_spread %>
+  <%= f.input :wager %>
+  <%= f.input :match_id %>
+  <%= f.input :home_team_id %>
+  <%= f.input :away_team_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.button :submit %>
+<% end %>

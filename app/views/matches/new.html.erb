@@ -1,0 +1,21 @@
+<%= simple_form_for(@match) do |f| %>
+  <% if @match.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+      <ul>
+      <% @match.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-inputs">
+    <%= f.input :home_team_id %>
+    <%= f.input :away_team_id %>
+    <%= f.input :home_team_score %>
+    <%= f.input :away_team_score %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
